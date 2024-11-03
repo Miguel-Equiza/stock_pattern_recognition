@@ -85,7 +85,7 @@ def popping_pattern(data_preprocessed, pretrained_model_p, pretrained_model_d, s
         if (pattern == [0, 0, 0, 0, 1]) | (pattern == [0, 0, 0, 0, 0]) | (n_fragment_days < round(n_original_days*0.1)) | (start > end) | (start < 0) | (end < 0):
             start = round(n_fragment_days/2)
             end = round(n_fragment_days/2)
-            pattern_list.append([0, 0, [0, 0, 0, 0, 1],[0]])
+            pattern_list.append([0, 0, tuple([0, 0, 0, 0, 1]),tuple([0])])
 
         if (start != end) & (start > 0) & (end > 0) & (start < end):
             if end > n_fragment_days:
@@ -98,7 +98,7 @@ def popping_pattern(data_preprocessed, pretrained_model_p, pretrained_model_d, s
                 global_end = n_original_days
 
             if (global_start < global_end) & ((global_end - global_start)>5):
-                pattern_list.append([global_start, global_end, pattern, binary])
+                pattern_list.append([global_start, global_end, tuple(pattern), tuple(binary)])
 
         else:
             global_end = end + ends_index[i]
@@ -154,9 +154,16 @@ def get_chart_p(ticker, start_date, end_date, cdle_patterns):
   data_preprocessed, scaler = preprocess_X(data)
   ax = popping_pattern(data_preprocessed, pretrained_model_p, pretrained_model_d, scaler)
 
+  ax = [
+    [item[0], item[1], tuple(item[2]), tuple(item[3])]
+    for item in ax
+  ]
+
   pattern_map = {
     ((0, 0, 0, 0, 0), (1,)):"No pattern",
     ((0, 0, 0, 0, 0), (0,)):"No pattern",
+    ((0, 0, 0, 0, 1), (1,)):"No pattern",
+    ((0, 0, 0, 0, 1), (0,)):"No pattern",
     ((0, 0, 0, 1, 0), (0,)):"Rising wedge",
     ((0, 0, 1, 0, 0), (0,)):"Falling wedge",
     ((0, 1, 0, 0, 0), (0,)):"Double top",
