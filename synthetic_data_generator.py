@@ -10,7 +10,7 @@ def get_X_start_end(n_days):
   length_pattern = np.random.randint(50,n_days/3+1) 
   start_pattern = np.random.randint(1,n_days-length_pattern-1)  
   end_pattern = start_pattern + length_pattern
-  days_after_pattern = n-end_pattern  
+  days_after_pattern = n_days-end_pattern  
 
   X = pd.to_datetime(np.arange(n_days), unit='D',
     origin=pd.Timestamp('2017-05-08'))

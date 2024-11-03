@@ -19,14 +19,14 @@ def gen_synthetic_x_y(l=round(0.4*50),pattern=["rising_wedge","falling_wedge","d
       }
   for i in range(l):
 
-    func={"rising_wedge":rising_wedge(n=500, mu=3, sigma=5, h=1, noise_level=2, ar1 = 0.95, ar2 = 0),
-        "falling_wedge":falling_wedge(n=500, mu=3, sigma=5, h=1, noise_level=2, ar1 = 0.95, ar2 = 0),
-        "double_top":double_top(n=500, mu=3, sigma=5, h=1, noise_level=2, ar1 = 0.95, ar2 = 0),
-        "double_bottom":double_bottom(n=500, mu=3, sigma=5, h=1, noise_level=2, ar1 = 0.95, ar2 = 0),
-        "ascending_triangle":ascending_triangle(n=500, mu=3, sigma=5, h=1, noise_level=2, ar1 = 0.95, ar2 = 0),
-        "descending_triangle":descending_triangle(n=500, mu=3, sigma=5, h=1, noise_level=2, ar1 = 0.95, ar2 = 0),
-        "h&s_top":head_shoulders(n=500, mu=3, sigma=5, h=1, noise_level=2, ar1 = 0.95, ar2 = 0),
-        "h&s_bottom":inv_head_shoulders(n=500, mu=3, sigma=5, h=1, noise_level=2, ar1 = 0.95, ar2 = 0)
+    func={"rising_wedge":rising_wedge(n_days=500, mu=3, sigma=5, max_h=1, noise_level=2, ar1 = 0.95, ar2 = 0),
+        "falling_wedge":falling_wedge(n_days=500, mu=3, sigma=5, max_h=1, noise_level=2, ar1 = 0.95, ar2 = 0),
+        "double_top":double_top(n_days=500, mu=3, sigma=5, max_h=1, noise_level=2, ar1 = 0.95, ar2 = 0),
+        "double_bottom":double_bottom(n_days=500, mu=3, sigma=5, max_h=1, noise_level=2, ar1 = 0.95, ar2 = 0),
+        "ascending_triangle":ascending_triangle(n_days=500, mu=3, sigma=5, max_h=1, noise_level=2, ar1 = 0.95, ar2 = 0),
+        "descending_triangle":descending_triangle(n_days=500, mu=3, sigma=5, max_h=1, noise_level=2, ar1 = 0.95, ar2 = 0),
+        "h&s_top":head_shoulders(n_days=500, mu=3, sigma=5, max_h=1, noise_level=2, ar1 = 0.95, ar2 = 0),
+        "h&s_bottom":inv_head_shoulders(n_days=500, mu=3, sigma=5, max_h=1, noise_level=2, ar1 = 0.95, ar2 = 0)
     }
 
     date, ope, hig, low, close, start, end = func[pattern]

@@ -10,6 +10,7 @@ import random
 import pandas as pd
 from preprocessing import *
 from candle_types_detector import *
+from tensorflow.keras.models import load_model
 
 candle_types = ['doji',
        'o_marubozu', 'gravestone', 'dragonfly_doji', 'hammer', 'c_marubozu',
@@ -142,8 +143,8 @@ def popping_pattern(data_preprocessed, pretrained_model_p, pretrained_model_d, s
 def get_chart_p(ticker, start_date, end_date, cdle_patterns):
   df = yf.download(ticker, start=start_date, end=end_date)
 
-  pretrained_model_p = tf.keras.models.load_model("model_p_final")
-  pretrained_model_d = tf.keras.models.load_model("model_p_d_final")
+  pretrained_model_p = tf.keras.models.load_model("model_p_final.keras")
+  pretrained_model_d = tf.keras.models.load_model("model_p_d_final.keras")
 
   df = candle_type_detection(df)
   columns_to_select = ['date', 'open', 'high', 'low', 'close'] + cdle_patterns
