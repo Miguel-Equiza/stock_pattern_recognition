@@ -55,6 +55,16 @@ if page == "Stock pattern detection":
             "<h3 style='color: red;'>Couldn't find relevant patterns, try another date range or ticker (Bigger ranges are better)</h3>",
             unsafe_allow_html=True
         )
+        fig.update_layout(
+            legend=dict(
+                orientation="h",  # Horizontal layout
+                x=0.5,            # Centered horizontally
+                xanchor="center",  # Position based on center of the x position
+                y=1.1,            # Slightly above the plot
+                yanchor="bottom"  # Position based on the bottom of the legend
+            )
+        )
+
         st.plotly_chart(fig)
 
 elif page == "About":
