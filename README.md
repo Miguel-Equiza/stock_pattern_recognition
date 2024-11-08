@@ -1,62 +1,19 @@
 # Stock pattern recognition
 
+## [View model website](https://stockpatternrecognition.streamlit.app/)
+
 ![First photo](images/first_photo.png)
 
 ## Index
 
-1 - [Usage (How to start using the project right away)](#usage)<br>
+1 - [Overview of the project workflow](#Project-diagram)<br>
 2 - [Detailed explanation of everything about the approach taken](#abstract)<br>
 3 - [Financial information about some candle and pattern types](#financial-information)<br>
 
-## Usage
 
-### Installation
-* create a virtual environment named `whatever`
-```bash
-pyenv virtualenv whatever
-```
+## Project-diagram
 
-* install dependencies (inside project dir):
-```bash
-pip install -r requirements.txt
-```
-
-### Files explained
-
-* how_to_use.ipynb
-
-In this file there is a short code of what to do to start seeing the model in action right away
-
-* complex_model_logic.py
-
-In this file you have the complex logic that is used to turn a tensorflow model into what we call the [popping model](#Our-final-approach) as detailed bellow, and also the logic to plot all the candles, the pattern and the grap together, with the following function called plotting:
-
-plotting(ticker, start_date, end_date,  with_pattern=False, with_candle = False, cdle_patterns=pd.Series(CDL_PATTERNS.keys()).sample(2))
-
-Please note that it could output you that it doesn't identify any pattern of what you give it
-For example:
-
-plotting(ticker = "TSLA", start_date = "2019-11-03", end_date = "2020-06-06",  with_pattern=True, with_candle = False)
-
-That outputs you the following plot:
-
-![TSLA](images/TSLA.png)
-
-* preprocessing.py
-
-Here is the preprocessing for the data used in the training of the model, both real and synthetic, and also the preprocessing for the data where you call the plotting function.
-
-* synthetic_data_generator.py
-
-Where all the synthetic data generation is done
-
-* get_data.py
-
-Where we get the data from the csvs stored in data/pattern
-
-* candle_types.py
-
-Here it is the logic to identify the single candle patterns that are available
+![Overview](images/process-overview.png)
 
 ## Abstract
 
@@ -127,6 +84,24 @@ Following this main structure we made two targets, one being an intermediate tar
 In the classification model the final target was a binary classification deciding which pattern was between the 2 of the family. And in the regression model the final target was 2 output regression model to find the start and the end date
 
 ![Regression model](images/regressionmodel.png)
+
+### Project files explained
+
+
+* data folder --> Here is all the real data obtained through the web scraping process
+
+* app.py & pages folder --> Streamlit front end
+
+* get_data.py --> Get the real data, creates synthetic data, combines both data and augmentates all data.
+
+* synthetic_data_generator.py --> Creates synthetic data based on basic mathematic functions
+
+* preprocessing.py --> Preprocessing used for yfinance data and training data is detailed
+
+* candle_types_detector.py --> Given a dataframe with the stock market data it creates a boolean column for each candle type that shows if that specific candle has that column's type
+
+* popping_model_logic.py --> All the heavy backend logic that allows to detect multiple models per timeframe, and also the logic that contains the plotting logic
+
 
 
 ## Financial-information
