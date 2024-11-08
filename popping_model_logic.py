@@ -198,8 +198,10 @@ def plotting(ticker, start_date, end_date, with_candle = True, cdle_patterns = [
   data=[]
   _ = [data.append(go.Scatter(x=row["x_rectangle"], y=row["y_rectangle"], mode='lines', fill='toself', fillcolor=f'rgba({np.random.randint(0,255)}, {np.random.randint(0,255)}, {np.random.randint(0,255)}, 0.1)', name=row["pattern"])) for index, row in ax_df.iterrows() if row["pattern"]!="No pattern"]
 
+  no_patterns = 0
   if data==[]:
-      print("Couldn't find relevant patterns, try another date range or ticker")
+      no_patterns = 1
+    #   print("Couldn't find relevant patterns, try another date range or ticker")
 
   data.append(go.Candlestick(x=df.iloc[:,0],
           open=df.iloc[:,1],
@@ -214,4 +216,4 @@ def plotting(ticker, start_date, end_date, with_candle = True, cdle_patterns = [
     fig = create_candlestick_chart(fig, df)
 
 #   fig.show()
-  return fig, ax_df
+  return fig, ax_df, no_patterns

@@ -43,6 +43,11 @@ if submitted:
     if custom_ticker:
         ticker = custom_ticker
 
-    fig, ax_df = plotting(ticker = ticker, start_date = start_date, end_date = end_date, with_candle = with_candle, cdle_patterns = candle_patterns)
-    st.dataframe(ax_df)
+    fig, ax_df, no_patterns = plotting(ticker = ticker, start_date = start_date, end_date = end_date, with_candle = with_candle, cdle_patterns = candle_patterns)
+    # st.dataframe(ax_df)
+    if no_patterns:
+        st.markdown(
+        "<h3 style='color: red;'>Couldn't find relevant patterns, try another date range or ticker</h3>",
+        unsafe_allow_html=True
+    )
     st.plotly_chart(fig)
