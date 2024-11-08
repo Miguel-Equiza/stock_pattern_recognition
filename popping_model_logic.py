@@ -73,7 +73,7 @@ def popping_pattern(data_preprocessed, pretrained_model_p, pretrained_model_d, s
         if saturation == data_fragments.shape[0]:
             break
 
-        y_p = pretrained_model_p.predict(one_data_fragment) 
+        y_p = pretrained_model_p.predict(one_data_fragment)
         pattern = list(np.round(y_p[0])[0].astype(np.int16))
         binary = list(np.round(y_p[1])[0].astype(np.int16))
 
@@ -213,4 +213,5 @@ def plotting(ticker, start_date, end_date, with_candle = True, cdle_patterns = [
 
     fig = create_candlestick_chart(fig, df)
 
-  fig.show()
+#   fig.show()
+  return fig
