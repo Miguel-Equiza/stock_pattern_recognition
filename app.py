@@ -8,7 +8,6 @@ st.markdown(
 
     ### [My website](https://miguel-equiza.github.io/personal_web/)
 
-    ![First photo](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/process-overview.jpg)
 
     ## Index
 
