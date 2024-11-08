@@ -13,7 +13,7 @@
 
 ## Project-diagram
 
-![Overview](images/process-overview.png)
+![Overview](images/process-overview.jpg)
 
 ## Abstract
 
