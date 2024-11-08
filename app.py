@@ -21,7 +21,7 @@ st.markdown(
 
     ## Project-diagram
 
-    ![Overview](images/process-overview.jpg)
+    ![Overview](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/process-overview.jpg)
 
     ## Abstract
 
@@ -47,11 +47,11 @@ st.markdown(
 
     The solution was doing data augmentation. Doing image croping giving random values from 0 to 2/3 of the width of the pattern to each side so that every crop of the same observation is different, and doing that 10 times for every observations of the unbalanced dataset.
 
-    ![Augmentation](images/data_augmen.png)
+    ![Augmentation](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/data_augmen.png)
 
     Furthermore, we leveraged the inherent symmetry within each pattern category, wherein each pattern had its corresponding "mirrored" counterpart. For instance, the rising wedge was paired with the falling wedge, the double bottom with the double top, and so forth. Consequently, we inverted each pattern and allocated them the same count as their respective mirrored patterns.
 
-    ![Upside Down](images/upside_down.png)
+    ![Upside Down](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/upside_down.png)
 
     ### Approaches considered
 
@@ -79,19 +79,19 @@ st.markdown(
 
     We decided to make 2 models, one for regression and another for classification. And combined them with something we called the popping model. What this does is first look at the hole timeseries to identify a pattern, once it identifies a pattern it splits the timeseries into 2, one from 0 to the start of the pattern and the other from the end of the pattern to the end of the time series; or in the case it decides that there is no pattern it splits the timeseries in half. And then does the same thing in those two timeseries, and it continious doing so until all of the timeseries lengths are below a threshold (we decided 10%)
 
-    ![Popping model](images/Popping_model.png)
+    ![Popping model](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/Popping_model.png)
 
     #### The classification model and regression model
 
     The main structure of the models was the same, as it was what better worked for both of them. We used two conv1d layers, 2 lstms and 2 dense layers with 16 neurons in the first and 32 in the second of each couple
 
-    ![Model structure](images/structure.png)
+    ![Model structure](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/structure.png)
 
     Following this main structure we made two targets, one being an intermediate target that with the concatenate affects the final target. This intermediate target was the same for both models, which was a classification task of 5 outputs that defined if the pattern was from one of the 4 families of patterns (rising wedge and ascending triangle, falling wedge and descending triangle, double top and head and shoulders, double bottom and inverse head and shoulders) or if it had no pattern. We did it this way because of the similarities some patterns had with each other to be able to train the model with more data for every class and improve accuracy.
 
     In the classification model the final target was a binary classification deciding which pattern was between the 2 of the family. And in the regression model the final target was 2 output regression model to find the start and the end date
 
-    ![Regression model](images/regressionmodel.png)
+    ![Regression model](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/regressionmodel.png)
 
     ### Project files explained
 
@@ -119,7 +119,7 @@ st.markdown(
     ### Single Candlesticks
 
     #### Doji
-    ![Doji](images/candlesticks/doji.jpeg)
+    ![Doji](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/doji.jpeg)
 
     **Characterised by:** the opening and closing price being the same.
 
@@ -128,7 +128,7 @@ st.markdown(
     **Logic:** 20 * ABS(O - C) <= H - L
 
     #### Dragonfly Doji
-    ![Doji](images/candlesticks/dragonfly_doji.jpeg)
+    ![Doji](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/dragonfly_doji.jpeg)
     **Characterised by:** the same open, close and high price during the trading window. It is the bullish version of the Gravestone Doji.
 
     **Signifies:** resistance of buyers and their attempts to push the market up.
@@ -136,7 +136,7 @@ st.markdown(
     **Logic:** 50 * ABS(O - C) <= H - L AND STOC1 >= 70 AND H - L >= AVGH10 - AVGL10 AND L = MINL10
 
     #### Gravestone Doji
-    ![Gravestone](images/candlesticks/gravestone_doji.png)
+    ![Gravestone](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/gravestone_doji.png)
     **Characterised by: ** very similar opening, closing, and low prices during the tradin window.
 
     **Signifies:** The long upper shadow is an indication that the market is testing a powerful supply or resistance area.
@@ -144,7 +144,7 @@ st.markdown(
     **Logic:** 100 * ABS(O - C) <= H - L AND STOC1 <= 5 AND H > L AND 10 * L <= 3 * H1 + 7 * L1 AND H - L >= AVGH10-AVGL10
 
     #### Hammer
-    ![Hammer](images/candlesticks/hammer.jpeg)
+    ![Hammer](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/hammer.jpeg)
     **Characterised by:** a short body, and long lower shadows.
 
     **Signifies:** That sellers were unsuccessful in their attempt to push the price lower. When at the bottom of a downtrend, it signifies a reversal.
@@ -152,7 +152,7 @@ st.markdown(
     **Logic:** 5 * ABS(C - O) <= H - L AND 10 * ABS(O - C) >= H - L AND 2 * O >= H + L AND STOC1 >= 50 AND (20 * O >= 19 * H + L OR STOC1 >= 95) AND 10 * (H - L) >= 8 * (AVGH10 - AVGL10) AND L = MINL5 AND H > L
 
     #### Spinning Top / Bottom
-    ![Spinning](images/candlesticks/spinning.jpeg)
+    ![Spinning](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/spinning.jpeg)
     **Characterised by:** a short body, but with shadows that are at least twice the size of the body.
 
     **Signifies:** That both buyers and sellers tried to push the price, but that it closed close to the opening price.
@@ -160,7 +160,7 @@ st.markdown(
     **Logic:** ABS(C - O) / (H - L) < BodyThreshold AND MAX(O, C) - L > ShadowThreshold AND H - MIN(O, C) > ShadowThreshold
 
     #### Marubozo
-    ![Marubozu](images/candlesticks/Marabozu.jpeg)
+    ![Marubozu](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/Marabozu.jpeg)
     **Characterised by:** a body with no high or low shadows.
 
     **Signifies:** An extremely strong buying or selling pressure in the previous trading period.
@@ -168,7 +168,7 @@ st.markdown(
     **Logic:** H - L = ABS(O - C) AND H - L > 3 * AVG(ABS(O - C), 15) / 2
 
     ##### Opening Marubozu
-    ![Opening_Marubozu](images/candlesticks/opening_marubozu.png)
+    ![Opening_Marubozu](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/opening_marubozu.png)
     **Characterised by:** the opening price occurring at the high or low of the trading window.
 
     **Signifies:** That as soon as the bell rang, the bears or the bulls took charge and pushed the prices in the direction for the rest of the window.
@@ -176,7 +176,7 @@ st.markdown(
     **Logic:** (L = O OR O = H) AND H - L > ABS(O - C) AND ABS(O - C) > 3 * AVG(ABS(O - C), 15) / 2
 
     #### Closing Marubozu
-    ![Closing_Marubozu](images/candlesticks/closing_marubozu.png)
+    ![Closing_Marubozu](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/closing_marubozu.png)
     **Characterised by:** the closing price being either the high or the low for the trading window.
 
     **Signifies:** That not only did the prices maintain the move in a single direction after initial jitters, in fact the participants maintained the sentiments until the end moment of the trading window.
@@ -191,7 +191,7 @@ st.markdown(
 
 
     #### Bearish Engulfing Bar Pattern
-    ![Bearish_Engulfing](images/candlesticks/bearish_engulfing.png)
+    ![Bearish_Engulfing](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/bearish_engulfing.png)
     **Characterised by:** two candlesticks, where the second candlestick's body engulfs the previous one.
 
     **Signifies:** That sellers are in control of the market. When it occurs at the end of an uptrend, it indicates buyers are engulfed by sellers which signals a trend reversal.
@@ -199,7 +199,7 @@ st.markdown(
     **Logic:** O1 > C1 AND 10 * (C - O) >= 7 * (H - L) AND C > O1 AND  C1 > O AND 10 * (H - L) >= 12 * (AVGH10 - AVGL10)
 
     #### Bullish Engulfing Bar Pattern
-    ![Bullish_Engulfing](images/candlesticks/bullish_engulfing.png)
+    ![Bullish_Engulfing](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/bullish_engulfing.png)
     **Characterised by:** two candlesticks, where the second candlestick's body engulfs the previous one.
 
     **Signifies:** That the  sellers are no longer in control of the market, and buyers will take control. When it occurs at the end of a downtrend, the reversal is more powerful as it represents a capitulation bottom.
@@ -207,7 +207,7 @@ st.markdown(
     **Logic:** O1 > C1 AND 10 * (C - O) >= 7 * (H - L) AND C > O1 AND  C1 > O AND 10 * (H - L) >= 12 * (AVGH10 - AVGL10)
 
     #### Harami Pattern
-    ![Harami](images/candlesticks/harami.png)
+    ![Harami](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/harami.png)
     **Characterised by:** A large first candle (the mother) followed by a smaller second candle (the baby). The second candle should close outside the previous one.
 
     **Signifies:** TBuyers and sellers don't know what to do, and there is no one in control od the market. The market is consolidating. It is considered a bearish reversal signal when it occurs at the top of an uptrend, and a bullish signal when it occurs at the bottom of a downtrend.
@@ -215,7 +215,7 @@ st.markdown(
     **Logic:** 10 * (O1 - C1) >= 7 * (H1 - L1) AND H1 - L1 >= AVGH10.1 - AVGL10.1 AND C > O AND O > C1 AND O1 > C AND 6 * (O1 - C1) >= 10 * (C - O)
 
     #### Tweezer Bottom Pattern
-    ![Tweezer_bottom](images/candlesticks/tweezer_bottom.png)
+    ![Tweezer_bottom](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/tweezer_bottom.png)
     **Characterised by:** A bearish candlestick followed by a bullish candle.
 
     **Signifies:** The Tweezer Bottom happens during a downtrend, when sellers push the market lower, but the next session the price closes above or roughly at the same price od the first bearish candle, which indicates that buyers are coming to reverse the market direction. This is a bullish reversal pattern seen at the bottom of a downtrend.
@@ -223,7 +223,7 @@ st.markdown(
     **Logic:** L = L1 AND 5 * ABS(C - O) < ABS(C1 - O1) AND 10 * ABS(C1 - O1) >= 9 * (H1 - L1) AND 10 * (H1 - L1) >= 13 * (AVGH20 - AVGL20)
 
     #### Tweezer Top Pattern
-    ![Tweezer_top](images/candlesticks/tweezer_top.png)
+    ![Tweezer_top](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/tweezer_top.png)
     **Characterised by:** A bullish candlestick followed by a bearish candle.
 
     **Signifies:** The tweezers top occurs during an uptrend when buyers push the price higher, but sellers surprised buyers by pushing the market lower and close down the open of the bullish candle.
@@ -237,7 +237,7 @@ st.markdown(
 
 
     #### Morning Star Pattern
-    ![Morning_star](images/candlesticks/morning_star.png)
+    ![Morning_star](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/morning_star.png)
     **Characterised by:** A first bearish candlestick, a second smaller candle which can be bullish or bearish, and a third, bullish candle that closes above the midpoint of the body of the first trading window.
 
     **Signifies:** The first candle indicates sellers are still in charge of the market.
@@ -251,7 +251,7 @@ st.markdown(
     **Logic:** O2 > C2 AND 5 * (O2 - C2) > 3 * (H2 - L2) AND C2 > O1 AND 2 * ABS(O1 - C1) < ABS(O2 - C2) AND H1 - L1 > 3 * (C1 - O1) AND C > O AND O > O1 AND O > C1
 
     #### Evening Star Pattern
-    ![Evening_star](images/candlesticks/evening_star.png)
+    ![Evening_star](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/evening_star.png)
     **Characterised by:** A first, bullish candle.
     This is followed by a small candle which can be bullish, bearish, Doji, or any other.
     The third candle is a large, bearish candle.
@@ -263,7 +263,7 @@ st.markdown(
     **Logic:** C2 - O2 >= .7 * (H2 - L2) AND H2 - L2 >= AVGH10.2 - AVGL10.2 AND C1 > C2 AND  O1 > C2 AND H - L >= AVGH10 - AVGL10 AND O - C >= .7 * (H - L) AND O < O1 AND O < C1
 
     #### Three Inside Up Pattern
-    ![Three_inside_up](images/candlesticks/three_inside_up.png)
+    ![Three_inside_up](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/three_inside_up.png)
     **Characterised by:** Composed by a large down candle, a smaller up candle contained with the previous candle, and then a third candle that closes above the close of the second candle.
 
     **Signifies:** A bullish reversal pattern.
@@ -271,7 +271,7 @@ st.markdown(
     **Logic:** 10 * (O2 - C2) >= 7 * (H2 - L2) AND (H2 - L2) >= AVGH10.2 - AVGL10.2 AND C1 > O1 AND O1 > C2 AND C1 < O2 AND 5 * (C1 - O1) <= 3 * (O2 - C2) AND O > O1 AND O < C1 AND C > C1 AND 10 * (C - O) >= 7 * (H - L)
 
     #### Three Inside Down Pattern
-    ![Three_inside_down](images/candlesticks/three_inside_down.png)
+    ![Three_inside_down](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/three_inside_down.png)
     **Characterised by:** Composed by a large up candle, a smaller down candle contained with the previous candle, and then a third down candle that closes below the close of the second candle.
 
     **Signifies:** A bearish reversal pattern.
@@ -287,7 +287,7 @@ st.markdown(
     **Logic:** O1 < O2 AND O1 > C2 AND O < O1 AND O > C1 AND C1 < L2 AND C < L1 AND C2 < 1.05 * L2 AND C1 < 1.05 * L1 AND C < 1.05 * L
 
     #### Three White Soldiers
-    ![Three_white_soldiers](images/candlesticks/three_white_soldiers.png)
+    ![Three_white_soldiers](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/three_white_soldiers.png)
     **Characterised by:** Three consecutive long-bodied candlesticks that open within the precious cansle's real body and a close that exceeds the previous candle's high.
 
     **Signifies:** A shift in control from the bulls to the bears.
@@ -299,7 +299,7 @@ st.markdown(
 
 
     #### Bearish / Bullish Breakaway
-    ![Breakaway](images/candlesticks/breakaway.jpg)
+    ![Breakaway](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/candlesticks/breakaway.jpg)
     **Characterised by:** A first, long candle.
     A second, third and fourth candle which must be spinning tops.
     A fifth candle must be a long candle which closes within the body gap of the first two candles.
@@ -313,49 +313,49 @@ st.markdown(
     ### Chart Patterns
 
     #### Bearish/Bullish flag
-    ![Flag_Pattern](images/charts/bullish-and-bearish.webp)
+    ![Flag_Pattern](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/charts/bullish-and-bearish.webp)
     **Characterised by:** Consists of the flagpole and a flag. As such, it resembles a flag on a pole. It's constituted after the price action trades in a continuous uptrend, making the higher highs and higher lows in the bulish one and the reverse in the bearish pattern
 
     **Signifies:**  The flag pattern is used to identify the possible continuation of a previous trend from a point at which price has drifted against that same trend. Should the trend resume, the price increase could be rapid, making the timing of a trade advantageous by noticing the flag pattern.
 
     #### Bearish/Bullish Pennant
-    ![Pennant_Pattern](images/charts/pennant.png)
+    ![Pennant_Pattern](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/charts/pennant.png)
     **Characterised by:** A pennant is a type of continuation pattern formed when there is a large movement in a security, known as the flagpole, followed by a consolidation period with converging trend lines—the pennant—
 
     **Signifies:**  It represents the second half of the flagpole as a continuation of the trend that it had before the consolidation of the price
 
     #### Ascending/descending triangle
-    ![Triangle_Pattern](images/charts/asc-desc-triangle.webp)
+    ![Triangle_Pattern](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/charts/asc-desc-triangle.webp)
     **Characterised by:**  It is created by price moves that allow for a horizontal line to be drawn along the swing highs and a rising trendline to be drawn along the swing lows. The two lines form a triangle. And the reverse happens in the descending
 
     **Signifies:** This are called continuation patterns since price will typically break out in the same direction as the trend that was in place just prior to the triangle forming.
 
     #### Cup with handle
-    ![Cup_with_handle_Pattern](images/charts/cup.png)
+    ![Cup_with_handle_Pattern](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/charts/cup.png)
     **Characterised by:** Is a technical indicator that resembles a cup with a handle, where the cup is in the shape of a "u" and the handle has a slight downward drift.
 
     **Signifies:** The cup and handle is considered a bullish signal, with the right-hand side of the pattern typically experiencing lower trading volume.
 
     #### Double top/bottom
-    ![Double_top/bottom_pattern](images/charts/top.png)
+    ![Double_top/bottom_pattern](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/charts/top.png)
     **Characterised by:** They occur when the underlying investment moves in a similar pattern to the letter "W" (double bottom) or "M" (double top).
 
     **Signifies:** A double top indicates a bearish reversal in trend. A double bottom is a signal for a bullish price movement.
 
     #### Head and shoudlers
-    ![Head_&_shoulders](images/charts/HSpattern.png)
+    ![Head_&_shoulders](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/charts/HSpattern.png)
     **Characterised by:** The pattern appears as a baseline with three peaks, where the outside two are close in height, and the middle is highest.
 
     **Signifies:** It is a specific chart formation that predicts a trend reversal.
 
     #### Falling and rising wedge
-    ![Wedge](images/charts/wedge.png)
+    ![Wedge](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/charts/wedge.png)
     **Characterised by:** Is marked by converging trend lines on a price chart. The two trend lines are drawn to connect the respective highs and lows that are either rising or falling at differing rates, giving the appearance of a wedge.
 
     **Signifies:** Wedge shaped trend lines are considered useful indicators of a potential reversal in price action by technical analysts.
 
     #### Triple top/bottom
-    ![Triple_top/bottom](images/charts/triple.png)
+    ![Triple_top/bottom](https://raw.githubusercontent.com/Miguel-Equiza/stock_pattern_recognition/master/images/charts/triple.png)
     **Characterised by:** A triple top is formed by three peaks moving into the same area, with pullbacks in between, while a triple bottom consists of three troughs with rallies in the middle.
 
     **Signifies:** While not often observed, triple tops and bottoms provide compelling signal for trend reversals.
