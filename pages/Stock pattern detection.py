@@ -31,7 +31,7 @@ with st.form("fitness_form"):
     start_date = st.date_input("Start date: YYYY-MM-DD", value=datetime(2019, 11, 3))
 
     max_end_date = start_date + timedelta(days=450)
-    end_date = st.date_input("End date: YYYY-MM-DD", min_value=start_date + timedelta(days=10), max_value=max_end_date)
+    end_date = st.date_input("End date: YYYY-MM-DD", min_value=start_date + timedelta(days=70), max_value=max_end_date)
 
     with_candle = st.selectbox("Do you want candle types to appear?", [True, False], index=0)
     candle_patterns = st.multiselect("Choose candle patterns", options=candle_types)

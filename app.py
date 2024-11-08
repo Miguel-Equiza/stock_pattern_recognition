@@ -362,6 +362,5 @@ st.markdown(
     **Signifies:** While not often observed, triple tops and bottoms provide compelling signal for trend reversals.
 
 
-    """,
-    unsafe_allow_html = True
+    """
 )
