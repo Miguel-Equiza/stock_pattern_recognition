@@ -8,7 +8,7 @@ st.markdown(
 
     ### [My website](https://miguel-equiza.github.io/personal_web/)
 
-    ![First photo](images/first_photo.png)
+    ![First photo](https://github.com/Miguel-Equiza/stock_pattern_recognition/blob/master/images/process-overview.jpg)
 
     ## Index
 
@@ -361,5 +361,6 @@ st.markdown(
     **Signifies:** While not often observed, triple tops and bottoms provide compelling signal for trend reversals.
 
 
-    """
+    """,
+    unsafe_allow_html = True
 )
