@@ -43,6 +43,6 @@ if submitted:
     if custom_ticker:
         ticker = custom_ticker
 
-    fig = plotting(ticker = ticker, start_date = start_date, end_date = end_date, with_candle = with_candle, cdle_patterns = candle_patterns)
-
+    fig, ax_df = plotting(ticker = ticker, start_date = start_date, end_date = end_date, with_candle = with_candle, cdle_patterns = candle_patterns)
+    st.dataframe(ax_df)
     st.plotly_chart(fig)

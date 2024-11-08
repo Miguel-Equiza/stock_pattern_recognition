@@ -214,4 +214,4 @@ def plotting(ticker, start_date, end_date, with_candle = True, cdle_patterns = [
     fig = create_candlestick_chart(fig, df)
 
 #   fig.show()
-  return fig
+  return fig, ax_df
