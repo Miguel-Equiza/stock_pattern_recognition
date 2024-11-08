@@ -47,7 +47,7 @@ if submitted:
     # st.dataframe(ax_df)
     if no_patterns:
         st.markdown(
-        "<h3 style='color: red;'>Couldn't find relevant patterns, try another date range or ticker</h3>",
+        "<h3 style='color: red;'>Couldn't find relevant patterns, try another date range or ticker (Bigger ranges are better)</h3>",
         unsafe_allow_html=True
     )
     st.plotly_chart(fig)
