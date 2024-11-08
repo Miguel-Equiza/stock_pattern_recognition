@@ -42,8 +42,7 @@ def candle_type_detection(df):
     return df
 
 def dochl(df):
-    df = df.iloc[:,:4]
-    df = df.reset_index()
+    df = df.reset_index()[["Date",'Open', 'High', 'Low', 'Close']]
     df.columns = ["date", "open", "high", "low", "close"]
     return df
 

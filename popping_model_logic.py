@@ -181,8 +181,8 @@ def get_chart_p(ticker, start_date, end_date, cdle_patterns):
 
   ax_df['upper_bound'] = ax_df.apply(lambda x: np.round(df.loc[x['start_id']:x['end_id']+2, 'high'].max(), 1), axis=1)
   ax_df['lower_bound'] = ax_df.apply(lambda x: np.round(df.loc[x['start_id']:x['end_id']+2, 'low'].min(), 1), axis=1)
-  ax_df["start_id"] = ax_df.apply(lambda x: str(df.iloc[x['start_id']]["date"]).replace(" 00:00:00",""), axis=1)
-  ax_df["end_id"] = ax_df.apply(lambda x: str(df.iloc[x['end_id']-1]["date"]).replace(" 00:00:00",""), axis=1)
+  ax_df["start_id"] = ax_df.apply(lambda x: str(df.iloc[x['start_id']]["date"]), axis=1)
+  ax_df["end_id"] = ax_df.apply(lambda x: str(df.iloc[x['end_id']-1]["date"]), axis=1)
 
   ax_df["x_rectangle"] = ax_df.apply(lambda x: [x['start_id'], x['end_id'], x['end_id'], x['start_id'], x['start_id']], axis=1)
   ax_df["y_rectangle"] = ax_df.apply(lambda x: [x['lower_bound'], x['lower_bound'], x['upper_bound'], x['upper_bound'], x['lower_bound']], axis=1)
