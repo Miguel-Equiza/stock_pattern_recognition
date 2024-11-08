@@ -5,10 +5,10 @@ from datetime import datetime, timedelta
 from popping_model_logic import *
 
 st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", ["Home", "About"], index=0)
+page = st.sidebar.radio("Go to", ["Stock pattern detection", "About"], index=0)
 
 # Define content for each page
-if page == "Home":
+if page == "Stock pattern detection":
     # Set up a form to accept all input variables
     st.title("Enter stock market data")
 
