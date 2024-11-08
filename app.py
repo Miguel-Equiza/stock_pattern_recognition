@@ -12,14 +12,16 @@ st.markdown(
 
     ## Index
 
-    1 - [Overview of the project workflow](#Project-diagram)<br>
-    2 - [Detailed explanation of everything about the approach taken](#abstract)<br>
-    3 - [Financial information about some candle and pattern types](#financial-information)<br>
+    1 - [Overview of the project workflow](#Project-diagram)
+
+    2 - [Detailed explanation of everything about the approach taken](#abstract)
+
+    3 - [Financial information about some candle and pattern types](#financial-information)
 
 
     ## Project-diagram
 
-    ![Overview](images/process-overview.png)
+    ![Overview](images/process-overview.jpg)
 
     ## Abstract
 
